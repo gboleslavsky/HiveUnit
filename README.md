@@ -1,5 +1,5 @@
 # HiveUnit
-This framework facilitates Test Driven Development of Hive scripts. It does so without any dependencies on local install of any Hadoop software. It is designed to run as a java jar, invoked by shell scripts, one set per OS. The command level API consists of five commands so far, and can be trivially extended to support an arbitrary number of commands, each with its own set of parameters. Commands supported so far:
+This framework facilitates Test Driven Development of Hive scripts. It does so without any dependencies on local install of any Hadoop software. It is designed to run as a java jar, invoked by shell scripts, one set per OS. Command level API consists of five commands, and can be trivially extended to support an arbitrary number of commands, each with its own set of parameters. Commands supported so far:
 
 eth -- converts excel test definition to hql -- given an .xlsx file formatted as shown in test definition spreadsheets in the data folder, generates a folder on the file system, currently named hql, with a set of folders for each spreadsheet, each folder with its own subfolders, one per statement type, of HQL DDL and DML statements, needed to conduct an automated test.
 
