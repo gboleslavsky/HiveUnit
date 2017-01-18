@@ -23,9 +23,9 @@ public class CommandInterpreter {
     public CommandInterpreter(String[] args) throws IOException{
         Arrays.stream(args).forEach(a->System.out.println(a));
         commander = new JCommander(new CommandInterpreter());
-        ExcelToHql eh = new ExcelToHql();
-        commander.addCommand("excel_to_hql", eh);
-        LoadData l = new LoadData();
+        ExcelToHql eth = new ExcelToHql();
+        commander.addCommand("eth", eth);
+        Load l = new Load();
         commander.addCommand("load", l);
         RunBusinessLogic b = new RunBusinessLogic();
         commander.addCommand("hive", b);
@@ -59,7 +59,7 @@ public class CommandInterpreter {
     }
 
     @Parameters(separators = "=", commandDescription = "Run creates and then inserts")
-    private class LoadData implements Executable{
+    private class Load implements Executable{
         @Parameter(names="-cp", required= true, description = "Absolute path to folder with config file.")
         private String confPath;
         public void execute() {
@@ -116,7 +116,7 @@ public class CommandInterpreter {
                 Tabular actual = H.actual(expected);
                 String resultsDir = H.resultsDirectory(expected.modelName);
                 String name = expected.name;
-                 expected.toFile     (resultsDir, name + "_exp"  + ".txt");
+                expected.toFile     (resultsDir, name + "_exp"  + ".txt");
                 actual.toFile       (resultsDir, name + "_act"  + ".txt");
                 expected.diffsToFile(resultsDir, name+ "_diffs" + ".txt", expected, actual);
             }
