@@ -101,13 +101,17 @@ public interface Tabular {
     //diffs
     static Tabular csvDiffs(String file1Contents, String file2Contents)   { return tabularCsv(file1Contents)
                                                                                     .diffs(tabularCsv(file2Contents)); }
+    
+    //BiFunction is needed to be able to zip 2 streams l and r by applying it to (l,r) and
+    //producing a list of results. see Tabular.diffs()
+    static BiFunction<List<String>, List<String>, List<String>> biDiffs() { return (l, r) -> diffs(l, r); }
 
     static Tabular diffs(Tabular l, Tabular r)      {
         List<List<String>> lRows =  l.rows();
         List<List<String>> rRows =  r.rows();
         return tabularStrings( H.list 
                                 (StreamUtils.zip
-                                (lRows.stream(), rRows.stream(), H.biDiffs()) ));
+                                (lRows.stream(), rRows.stream(), biDiffs()) ));
     }
 
     default Tabular diffs(Tabular t)                { return diffs(this, t);}
