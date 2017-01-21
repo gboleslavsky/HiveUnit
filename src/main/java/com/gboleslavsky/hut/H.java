@@ -149,24 +149,6 @@ public class H {
         return  Arrays.asList("null", "-99999", null, "", "'null'").contains(v);
     }
 
-    static List<String> diffs(List<String> l, List<String> r) {
-        //create a structure of results as if unequal, and replace the equal ones with ""
-        return list(
-                zip(l, "~", r).stream().
-                        map(s -> diffEquals(left(s),right(s))
-                                ? "" : s));
-    }
-
-    static boolean diffEquals(String l, String r){
-        if (emptyValue(l) && emptyValue(r))      return true;
-        else if (emptyValue(l) || emptyValue(r)) return false;
-        else                                     return noQuotes(l).equals(noQuotes(r));
-    }
-
-    //BiFunction is needed to be able to zip 2 streams l and r by applying it to (l,r) and
-    //producing a list of results. see Tabular.diffs()
-    static BiFunction<List<String>, List<String>, List<String>> biDiffs() { return (l, r) -> diffs(l, r); }
-
     // ------------------------------- File utilities -------------------------------
     static Properties loadConfig(String confPath) {
         Properties conf = new Properties();

@@ -3,6 +3,7 @@ package com.gboleslavsky.hut;
 import com.codepoetics.protonpack.*;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 import org.apache.spark.sql.Dataset;
@@ -101,9 +102,23 @@ public interface Tabular {
     //diffs
     static Tabular csvDiffs(String file1Contents, String file2Contents)   { return tabularCsv(file1Contents)
                                                                                     .diffs(tabularCsv(file2Contents)); }
-    
+
+    static List<String> diffs(List<String> l, List<String> r) {
+        //create a structure of results as if unequal, and replace the equal ones with ""
+        return H.list(
+                H.zip(l, "~", r).stream().
+                        map(s -> diffEquals(H.left(s),H.right(s))
+                                ? "" : s));
+    }
+
+    static boolean diffEquals(String l, String r){
+        if (H.emptyValue(l) && H.emptyValue(r))      return true;
+        else if (H.emptyValue(l) || H.emptyValue(r)) return false;
+        else                                         return H.noQuotes(l).equals(H.noQuotes(r));
+    }
+
     //BiFunction is needed to be able to zip 2 streams l and r by applying it to (l,r) and
-    //producing a list of results. see Tabular.diffs()
+    //producing a list of results.
     static BiFunction<List<String>, List<String>, List<String>> biDiffs() { return (l, r) -> diffs(l, r); }
 
     static Tabular diffs(Tabular l, Tabular r)      {
