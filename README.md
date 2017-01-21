@@ -1,5 +1,5 @@
 # HiveUnit
-I decided to write this tool after I realized that most Hive developers do not write automated unit tests for their queries. By unit tests I mean:
+I decided to write this tool after I realized that most Hive developers do not write unit tests for their queries. By unit tests I mean:
 - automated tests 
 - that developers can run locally 
 - to test important queries 
