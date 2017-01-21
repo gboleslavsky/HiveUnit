@@ -2,8 +2,8 @@
 I decided to write this tool after I realized that most Hive developers do not write unit tests for their queries. By unit tests I mean:
 - automated tests 
 - that developers can run locally 
-- to test important queries 
-- and check if they created bugs in existing functionaity 
+- to test important new queries 
+- and check if they have damaged what worked before while developing something new  
 - before committing to a remote repository, to make sure they have not broken the build. 
 
 After looking at tools that are available for hive 1.xx, I did not find any that are easy to use by developers with SQL background. The fact that Hadoop is almost impossible to install on Windows makes it even more difficult.  This framework facilitates Test Driven Development of Hive scripts without any dependencies on local install of any Hadoop software. It is designed to run as a java jar, invoked by shell scripts, one set per OS. It uses Spark 2.XX to run hql, which creates local HDFS behind the scenes. 
