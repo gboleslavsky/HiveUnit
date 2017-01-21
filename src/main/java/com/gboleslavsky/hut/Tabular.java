@@ -105,9 +105,9 @@ public interface Tabular {
     static Tabular diffs(Tabular l, Tabular r)      {
         List<List<String>> lRows =  l.rows();
         List<List<String>> rRows =  r.rows();
-        //Collections.sort(lRows, Comparator.comparing(e -> e.get(0)));
-        //Collections.sort(rRows, Comparator.comparing(e -> e.get(0)));
-        return tabularStrings( H.list( StreamUtils.zip( lRows.stream(), rRows.stream(), H.biDiffs()) ));
+        return tabularStrings( H.list 
+                                (StreamUtils.zip
+                                (lRows.stream(), rRows.stream(), H.biDiffs()) ));
     }
 
     default Tabular diffs(Tabular t)                { return diffs(this, t);}
