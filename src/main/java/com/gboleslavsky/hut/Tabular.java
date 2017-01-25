@@ -12,7 +12,7 @@ import org.apache.spark.sql.Row;
 import static java.util.Arrays.asList;
 
 public interface Tabular {
-    /*  Mixin utility for String hiveTables
+    /*  Mixin utility for typed tables
         some uses are:
          - in assert functionality to test any system that produces tabular data of actual vs a table with expected values.
             Expected data can be provided as Excel or as .csv. Column names are in the first line, and some way can be designed
