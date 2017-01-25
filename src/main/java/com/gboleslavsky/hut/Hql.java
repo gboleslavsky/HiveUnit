@@ -445,64 +445,7 @@ public class Hql {
     }
 
     public static void main(String[] args) throws Throwable{
-        //System.out.println(H.scriptsToRun());
-        //List<String> h = Arrays.asList("table_name", "schema");
-       // System.out.println("h= " + h + " schema index = " + h.indexOf("schema"));
-
         new CommandInterpreter(args).interpret();
         return;
-        /*
-        String selPath = H.hqlDirectory() + "demo1-11-22/selects/HEV_ACTIVE_ELIGIBILITY_SEL.hql";
-        String script = H.fileToString(selPath);
-        Dataset<org.apache.spark.sql.Row> ds = LocalSparkHqlRunner.runScriptReturnResults(script);
-        ds.show();
-        //Arrays.asList(args).stream().forEach(a -> System.out.println(a));
-        return;
-
-        System.out.println();
-        In in = new In();
-        JCommander jc = new JCommander(in, args);
-        jc.addCommand("in", in);
-        jc.parse(args);
-        String cmd = jc.getParsedCommand();
-        if ("in".equals(cmd)) {
-         try {
-             hTL.forEach(hT -> System.out.println(hT));
-             List<String> rl0 = Arrays.asList("c1", "c2", "c3");
-             List<String> rl1 = Arrays.asList("row1col1", "row1col2", "row1col3");
-             List<String> rl2 = Arrays.asList("row2col1", "row2col2", "row2col3");
-             List<String> rl3 = Arrays.asList("row3col1", "row3col2", "row3col3");
-             List<String> rl4 = Arrays.asList("row4col1", "row4col2", "row4col3");
-             List<List<String>> lists = Arrays.asList(rl0, rl1, rl2, rl3, rl4);
-
-             HiveTable dfTblr = new HiveTable();
-             Tabular tls = Tabular.tabularStrings(lists);
-             tls.col(1).stream().forEach(System.out::println);
-             Tabular csvTbl = Tabular.tabularCsv(System.getProperty("user.dir") + "/assert_test-12-1-1.csv");
-             for (int i = 0; i < csvTbl.numCols(); i++) {
-                 System.out.println("\nColumn " + i);
-                 csvTbl.col(i).stream().forEach(System.out::println);
-             }
-
-             Tabular d = Tabular.diffs(tls, csvTbl);
-             System.out.println(d.isEmpty());
-             java.util.Properties p = H.loadConfig(System.getProperty("user.dir") + "/excelConf/gb.gb");
-             System.out.println((String) p.get("path"));
-             tls.toFile( "/lists_hql.hql");
-             hTL.forEach(hT -> hT.saveInsertsToFile());
-             hTL.forEach(hT -> hT.saveSelectsToFile());
-             String hqlIn = H.fileToString("HEV_ACTIVE_ELIGIBILITY_IN.hql");
-             LocalSparkHqlRunner.runScript(hqlIn);
-             String hql = H.fileToString("HEV_ACTIVE_ELIGIBILITY_IN_SEL.hql");
-             Dataset<org.apache.spark.sql.Row> r = LocalSparkHqlRunner.runScriptReturnResults(hql);
-             r.show();
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-        } else {
-            System.out.println("No in");
-
-        }
-        */
     }
 }
